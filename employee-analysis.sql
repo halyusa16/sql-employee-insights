@@ -110,55 +110,6 @@ WHERE dem.age >= 60
 ORDER BY dept.department_name ASC;
 
 
--- Missing or Inconsistent Data
--- List all employees with missing dept_id. Suggest a way to detect which department they likely belong to based on similar occupations.
-SELECT employee_id, first_name, last_name, occupation, dept_id
-FROM employee_salary
-WHERE dept_id IS NULL;
-
--- Are there any employees with duplicate names but different IDs?
-SELECT employee_id, first_name, last_name
-FROM employee_demographics
-WHERE (first_name, last_name) IN (
-	SELECT first_name, last_name 
-    FROM employee_demographics
-    GROUP BY first_name, last_name 
-    HAVING COUNT(DISTINCT employee_id) > 1
-);
-
-
--- Subqueries & CTE Logic
--- Which employees earn more than their department’s average salary?
-SELECT sal.employee_id,
-	sal.first_name, 
-    sal.last_name,
-    dept.department_name,
-    sal.salary,
-    (SELECT ROUND(AVG(salary), 2) FROM employee_salary s WHERE s.dept_id = sal.dept_id) AS dept_avg_salary
-FROM employee_salary sal
-JOIN parks_departments dept ON sal.dept_id = dept.department_id
-WHERE sal.salary > (
-	SELECT AVG(salary)
-    FROM employee_salary s2
-    WHERE s2.dept_id = sal.dept_id
-    );
-
--- Use a CTE to create a department-level summary: total employees, average salary, and max salary.
-WITH dept_summary AS (
-	SELECT dept.department_name,
-		COUNT(sal.employee_id) AS employee_count, 
-		ROUND(AVG(sal.salary), 2) AS avg_salary, 
-        MAX(sal.salary) AS highest_salary, 
-        MIN(sal.salary) AS lowest_salary
-	FROM employee_salary sal
-	JOIN parks_departments dept ON sal.dept_id = dept.department_id
-    GROUP BY dept.department_name
-    ORDER BY dept.department_name
-    )
-SELECT * 
-FROM dept_summary;
-
-
 -- Scenario-Based Analysis
 -- Assume the organization wants to cut costs. Which 3 departments have the highest total payroll?
 SELECT 	sal.dept_id, 
@@ -211,4 +162,50 @@ WHERE sal.salary > (
     )
     AND dem.age < 35;
 
+-- Missing or Inconsistent Data
+-- List all employees with missing dept_id. Suggest a way to detect which department they likely belong to based on similar occupations.
+SELECT employee_id, first_name, last_name, occupation, dept_id
+FROM employee_salary
+WHERE dept_id IS NULL;
 
+-- Are there any employees with duplicate names but different IDs?
+SELECT employee_id, first_name, last_name
+FROM employee_demographics
+WHERE (first_name, last_name) IN (
+	SELECT first_name, last_name 
+    FROM employee_demographics
+    GROUP BY first_name, last_name 
+    HAVING COUNT(DISTINCT employee_id) > 1
+);
+
+
+-- More Subqueries & CTE Logic
+-- Which employees earn more than their department’s average salary?
+SELECT sal.employee_id,
+	sal.first_name, 
+    sal.last_name,
+    dept.department_name,
+    sal.salary,
+    (SELECT ROUND(AVG(salary), 2) FROM employee_salary s WHERE s.dept_id = sal.dept_id) AS dept_avg_salary
+FROM employee_salary sal
+JOIN parks_departments dept ON sal.dept_id = dept.department_id
+WHERE sal.salary > (
+	SELECT AVG(salary)
+    FROM employee_salary s2
+    WHERE s2.dept_id = sal.dept_id
+    );
+
+-- Use a CTE to create a department-level summary: total employees, average salary, and max salary.
+WITH dept_summary AS (
+	SELECT dept.department_name,
+		COUNT(sal.employee_id) AS employee_count, 
+		ROUND(AVG(sal.salary), 2) AS avg_salary, 
+        MAX(sal.salary) AS highest_salary, 
+        MIN(sal.salary) AS lowest_salary
+	FROM employee_salary sal
+	JOIN parks_departments dept ON sal.dept_id = dept.department_id
+    GROUP BY dept.department_name
+    ORDER BY dept.department_name
+    )
+SELECT * 
+FROM dept_summary;
