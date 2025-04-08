@@ -77,4 +77,6 @@ The dataset consists of three tables:
 - SQL (MySQL Workbench)
 - GitHub for version control and documentation
 
+---
+✨ _Created by Halyusa Ard Wahyudi as part of a data analytics portfolio._ 🚀
 
