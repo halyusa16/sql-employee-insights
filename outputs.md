@@ -96,7 +96,7 @@ Sample output:
 | 18          | Mona-Lisa   | Saperstein    | Marketing Executive          | NULL     |
 
 #### 2. Duplicate employee names with different IDs
-*Data not shown (placeholder for logic result)*
+*Data not shown*
 
 ---
 
