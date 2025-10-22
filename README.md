@@ -1,12 +1,12 @@
-# 🧮 Employee Insights SQL Analysis
+# Employee Insights SQL Analysis
 
-## 📌 Overview
+## Overview
 This project aimed to dives into employee data to uncover actionable insights using SQL. It mimics real-world HR and business analysis tasks—from salary comparisons to workforce demographics and potential cost-cutting strategies.
 
 This project includes aggregations, joins, subqueries, CTEs, and window functions.
 
 
-## 🗃️ Dataset
+## Dataset
 
 The dataset consists of three tables:
 
@@ -15,7 +15,7 @@ The dataset consists of three tables:
 - **parks_departments** – Department ID and names  
 
 
-## 🛠️ SQL Skills Demonstrated
+## SQL Skills Demonstrated
 
 - Joins
 - Aggregations (`AVG()`, `COUNT()`, `MAX()`, `MIN()`)
@@ -27,7 +27,7 @@ The dataset consists of three tables:
 - Scenario-based business questions
 
 
-## 📈 Key Takeaways
+## Key Takeaways
 
 - Ability to analyze structured data from multiple dimensions (salary, department, age, etc.)
 - Translate business questions into precise SQL queries
@@ -36,9 +36,9 @@ The dataset consists of three tables:
 
 ---
   
-## 📊 Analysis Sections & Business Questions
+## Analysis Sections & Business Questions
 
-### 🔹 Department & Salary Analysis
+### Department & Salary Analysis
 
 - What is the average salary per department, and how does it compare to the overall average?
 ```sql
@@ -380,11 +380,9 @@ WHERE (first_name, last_name) IN (
 | 15          | Tahani      | Al-Jamil      | Public Relations Officer     | NULL     |
 | 18          | Mona-Lisa   | Saperstein    | Marketing Executive          | NULL     |
 
-## 💻 Tools Used
+## Tools Used
 
 - SQL (MySQL Workbench)
 - GitHub for version control and documentation
 
 ---
-✨ _Created by Halyusa Ard Wahyudi as part of a data analytics portfolio._ 🚀
-
