@@ -1,7 +1,7 @@
 # Employee Insights SQL Analysis
 
 ## Overview
-This project aimed to dives into employee data to uncover actionable insights using SQL. It mimics real-world HR and business analysis tasks—from salary comparisons to workforce demographics and potential cost-cutting strategies.
+This project aimed to dives into employee data to uncover actionable insights using SQL. It mimics real-world HR and business analysis tasks—from salary comparisons to workforce demographics and potential cost-cutting strategies. Used for querying exercise.
 
 This project includes aggregations, joins, subqueries, CTEs, and window functions.
 
